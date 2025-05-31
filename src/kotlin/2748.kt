@@ -1,4 +1,4 @@
-package kotlin
+
 
 fun main() {
     var arr = MutableList<Long> (100){0L}

@@ -1,4 +1,4 @@
-package kotlin
+
 
 fun main() {
     val(n, r, c) = readln().split(" ").map{it.toLong()}// 2^(n-1) , row, column

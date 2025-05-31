@@ -1,4 +1,4 @@
-package kotlin.`23560`
+
 
 fun main() {
     val n = readln().toInt()

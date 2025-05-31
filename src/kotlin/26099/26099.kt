@@ -1,4 +1,4 @@
-package kotlin.`26099`
+
 
 fun main() {
     val n = readln().toLong()

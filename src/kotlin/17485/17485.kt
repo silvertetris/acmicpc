@@ -1,4 +1,4 @@
-package kotlin.`17485`
+
 
 import java.util.Scanner
 

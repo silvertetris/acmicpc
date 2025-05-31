@@ -1,4 +1,4 @@
-package kotlin.`15663`
+
 
 fun main() {
     val (n, m) = readln().split(" ").map { it.toInt() }

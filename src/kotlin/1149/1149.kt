@@ -1,4 +1,4 @@
-package kotlin.`1149`
+
 
 fun main() {
     val N = readLine()!!.toInt()

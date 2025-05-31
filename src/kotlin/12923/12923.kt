@@ -1,4 +1,4 @@
-package kotlin.`12923`
+
 
 fun main() {
     data class Stage(val a: Int, val b: Int, var done1: Boolean = false, var done2: Boolean = false)

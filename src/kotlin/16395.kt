@@ -1,4 +1,4 @@
-package kotlin
+
 
 fun dp(n: Int, k: Int): Int {
     if (k == 0 || k == n) return 1

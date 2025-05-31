@@ -1,4 +1,4 @@
-package kotlin
+
 
 fun main() {
     var arr:Array<Int> = readln().split(" ").map{it.toInt()}.toTypedArray()

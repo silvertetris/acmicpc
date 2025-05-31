@@ -1,4 +1,4 @@
-package kotlin
+
 
 fun main() {
     var num = readln()

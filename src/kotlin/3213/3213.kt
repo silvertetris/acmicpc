@@ -1,4 +1,4 @@
-package kotlin.`3213`
+
 
 fun minimalPizzas(slices: List<String>): Int {
     var count1_4 = slices.count { it == "1/4" }

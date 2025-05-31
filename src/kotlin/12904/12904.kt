@@ -1,4 +1,4 @@
-package kotlin.`12904`
+
 
 fun main() {
     val s = readln()

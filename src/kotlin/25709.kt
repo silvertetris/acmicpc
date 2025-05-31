@@ -1,4 +1,4 @@
-package kotlin
+
 
 fun main() {
     var n = readln().toInt()

@@ -1,4 +1,4 @@
-package kotlin
+
 
 import java.io.BufferedWriter
 import java.io.OutputStreamWriter

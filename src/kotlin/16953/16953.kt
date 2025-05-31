@@ -1,4 +1,4 @@
-package kotlin.`16953`
+
 
 fun main() {
     var (a, b) = readln().split(" ").map { it.toInt() }

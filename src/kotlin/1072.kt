@@ -1,4 +1,4 @@
-package kotlin
+
 
 fun main() {
     val (x, y) = readln().split(" ").map { it.toLong() }

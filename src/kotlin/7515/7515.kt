@@ -1,4 +1,4 @@
-package kotlin.`7515`
+
 
 fun main() {
     val br = System.`in`.bufferedReader()
