@@ -1,6 +1,6 @@
 import kotlin.math.*
 
-data class Complex(val real: Double, val imag: Double) { //실수부 허수부
+/*data class Complex(val real: Double, val imag: Double) { //실수부 허수부
     operator fun plus(o: Complex)  = Complex(real + o.real,     imag + o.imag)
     operator fun minus(o: Complex) = Complex(real - o.real,     imag - o.imag)
     operator fun times(o: Complex) = Complex(
@@ -100,3 +100,4 @@ fun main() {
     }
     print(answer)
 }
+*/
