@@ -45,6 +45,5 @@ fun main() {
             minIdx = h
         }
     }
-
     print(minIdx)
 }
