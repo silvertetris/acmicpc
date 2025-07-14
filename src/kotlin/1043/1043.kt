@@ -21,9 +21,9 @@ fun main() {
         }
     }
     repeat(n) {
-        for(i in n downTo 1) {
-            for(j in adj[i]) {
-                if(truth.contains(j) || truth.contains(i)) {
+        for (i in n downTo 1) {
+            for (j in adj[i]) {
+                if (truth.contains(j) || truth.contains(i)) {
                     truth.add(i)
                     truth.add(j)
                 }
