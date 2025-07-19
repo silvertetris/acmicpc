@@ -15,4 +15,5 @@ foreach(_src IN LISTS SRC_FILES)
 
     # replace spaces (and, if you like, other non-alphanumerics) with underscores
     string(REGEX REPLACE "[^A-Za-z0-9]" "_" _target "${_name}")
+    add_executable(${_target} "${_src}")
 endforeach()
