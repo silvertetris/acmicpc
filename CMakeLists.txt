@@ -1,6 +1,6 @@
 # top of CMakeLists.txt
 cmake_minimum_required(VERSION 3.15)
-project(CodeForceList LANGUAGES CXX)
+project(acmicpc LANGUAGES CXX)
 
 # grab all your .cpp files
 file(GLOB_RECURSE
