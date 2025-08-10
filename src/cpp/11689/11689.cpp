@@ -12,7 +12,7 @@ int main() {
     long result = n;
     for (long p = 2; p <= sqrt(n); p++) {
         if (n % p == 0) {
-            result = result - result / p;
+            result -= result / p;
 
             while (n % p == 0) {
                 n /= p;
