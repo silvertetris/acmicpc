@@ -1,51 +1,38 @@
-
 fun main() {
     val br = System.`in`.bufferedReader()
-    val bw = System.`out`.bufferedWriter()
+    val bw = System.out.bufferedWriter()
+    val dx = intArrayOf(1, 0, -1, 0)
+    val dy = intArrayOf(0, 1, 0, -1)
     val t = br.readLine().toInt()
-
-    val dx = arrayOf(0, 0, -1, 1)
-    val dy = arrayOf(-1, 1, 0, 0)
-
     repeat(t) {
-        val (m, n, k) = br.readLine().split(" ").map { it.toInt() }
-        val field = Array(n) { IntArray(m) }
-        val visited = Array(n) { BooleanArray(m) }
-
+        val(m, n, k) = br.readLine().split(" ").map { it.toInt() }
+        val map = Array(n) {IntArray(m) {0} }
         repeat(k) {
-            val (x, y) = br.readLine().split(" ").map { it.toInt() }
-            field[y][x] = 1
+            val(u, v) = br.readLine().split(" ").map { it.toInt() }
+            map[v][u] = 1
         }
-
-        fun dfs(x: Int, y: Int) {
-            val stack = mutableListOf(Pair(x, y))
-            while (stack.isNotEmpty()) {
-                val (cx, cy) = stack.removeLast()
-                for (i in 0 until 4) {
-                    val nx = cx + dx[i]
-                    val ny = cy + dy[i]
-                    if (nx in 0 until m && ny in 0 until n && !visited[ny][nx] && field[ny][nx] == 1) {
-                        visited[ny][nx] = true
-                        stack.add(Pair(nx, ny))
-                    }
+        val visited = Array(n) { BooleanArray(m) {false} }
+        fun dfs(x:Int, y:Int) {
+            visited[x][y] = true
+            for(i in 0 until 4) {
+                val nx= x+dx[i]
+                val ny= y+dy[i]
+                if(nx in 0 until n && ny in 0 until m && !visited[nx][ny] && map[nx][ny] == 1) {
+                    dfs(nx, ny)
                 }
             }
         }
-
-        var wormCount = 0
-        for (i in 0 until n) {
-            for (j in 0 until m) {
-                if (field[i][j] == 1 && !visited[i][j]) {
-                    visited[i][j] = true
-                    dfs(j, i)
-                    wormCount++
+        var cnt = 0
+        for(i in 0 until n) {
+            for(j in 0 until m) {
+                if(!visited[i][j] &&map[i][j] ==1 ) {
+                    cnt++
+                    dfs(i, j)
                 }
             }
         }
-
-        bw.write("$wormCount\n")
+        bw.write("$cnt\n")
     }
-
     bw.flush()
     bw.close()
     br.close()
