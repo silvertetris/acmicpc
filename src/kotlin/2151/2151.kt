@@ -18,7 +18,7 @@ fun main() {
                     initA = i
                     initB = j
                     flag = true
-                    break
+                    continue
                 }
             } else {
                 if (arr[i][j] == '#') {
