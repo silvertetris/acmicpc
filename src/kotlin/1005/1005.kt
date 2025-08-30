@@ -1,51 +1,40 @@
-import java.util.ArrayDeque
+import java.util.LinkedList
+import java.util.Queue
 
 fun main() {
     val br = System.`in`.bufferedReader()
     val bw = System.out.bufferedWriter()
     val t = br.readLine().toInt()
     repeat(t) {
-        val (n, k) = br.readLine().split(" ").map { it.toInt() }
-        val d = listOf(0) + br.readLine().split(" ").map { it.toInt() }
-        val ruleAdj = Array(n + 1) { mutableListOf<Int>() }
-        val indegree = IntArray(n + 1)
-
+        val(n, k) = br.readLine().split(" ").map { it.toInt() }
+        val indegree = IntArray(n+1) {0}
+        val d = br.readLine().split(" ").map { it.toInt() }.toIntArray()
+        val adj = Array(n+1) {mutableListOf<Int>()}
         repeat(k) {
-            val (a, b) = br.readLine().split(" ").map { it.toInt() }//a 짓고 b짓기 가능
-            ruleAdj[a].add(b)
-            indegree[b]++ //차수 증가 -> 이거 지으려면 지어야 하는거 개수
+            val(x, y) = br.readLine().split(" ").map { it.toInt() }
+            adj[x].add(y)//x 짓고 y 짓기
+            indegree[y]++
         }
-        val mandate = br.readLine().toInt()
-
-        /*
-        #1. states/subproblems
-        dp[i] = i번째 건물을 짓는데 걸리는 최소 시간
-         */
-        val dp = IntArray(n + 1)
-
-        val queue = ArrayDeque<Int>()
-        for (i in 1..n) {
-            if (indegree[i] == 0) {
-                //#2. Base Cases
-                dp[i] = d[i]
-                queue.add(i)
+        val w = br.readLine().toInt()
+        val dp = IntArray(n+1) {0}
+        val q: Queue<Int> = LinkedList()
+        for(i in 1..n) {
+            if(indegree[i]==0) {
+                q.add(i)
+                dp[i] = d[i-1]
             }
         }
-
-        while (queue.isNotEmpty()) {
-            val u = queue.removeFirst()
-            for (v in ruleAdj[u]) {
-                //#3. transitions
-                dp[v] = maxOf(dp[v], dp[u] + d[v])
-                // 차수 감소 후 0이면 큐에 추가
-                if (--indegree[v] == 0) {
-                    queue.add(v)
+        while(q.isNotEmpty()) {
+            val cur = q.poll()
+            for(nei in adj[cur]) {
+                indegree[nei]--
+                dp[nei] = maxOf(dp[nei], dp[cur] + d[nei-1])
+                if(indegree[nei]==0) {
+                    q.add(nei)
                 }
             }
         }
-
-        //#4. final answer
-        bw.write("${dp[mandate]}\n")
+        bw.write("${dp[w]}\n")
     }
     bw.flush()
     bw.close()
