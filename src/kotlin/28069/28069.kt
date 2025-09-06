@@ -2,17 +2,10 @@ fun main() {
     val(n, k) = readln().split(" ").map { it.toInt() }
     val dp = IntArray(n+1) {Int.MAX_VALUE -100000}
     dp[0] = 0
-    for(i in 1.. n) {
-        var temp = -1
-        if (i % 3 == 0) {
-            temp = i *2 /3
-        } else if (i % 3 == 1 && i != 1) {
-            temp = 2 * ((i - 1) / 3) + 1
-        }
-        dp[i] = if (temp >= 0) {
-            minOf(dp[i - 1] + 1, dp[temp] + 1)
-        } else {
-            dp[i - 1] + 1
+    for(i in 0 until n) {
+        dp[i+1] = minOf(dp[i+1], dp[i] +1)
+        if(i+i/2<=n) {
+            dp[i+i/2] = minOf(dp[i+i/2], dp[i] +1)
         }
     }
     if(dp[n] >k) {
