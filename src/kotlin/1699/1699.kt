@@ -8,12 +8,15 @@ fun main() {
     for(i in 0 until square.size) {
         square[i] = i*i
     }
+    dp[0] = 0
     dp[1] = 1
     for(i in 2..n) {
-        for(j in 1..square.size) {
+        dp[i] = i
+        for(j in 1 until square.size) {
             if(i >= square[j]) {
-                dp[i] = minOf()
+                dp[i] = minOf(dp[i], dp[i-square[j]]+1)
             }
         }
     }
+    print(dp[n])
 }
