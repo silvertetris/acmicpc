@@ -2,22 +2,27 @@ fun main() {
     val br = System.`in`.bufferedReader()
     val bw = System.out.bufferedWriter()
     val t = br.readLine().toInt()
-    val dx = intArrayOf(0, -1, 0, 1)
+    /*
+    새롭게 정의해야함 dx dy 헷갈렸음
+     */
+    val dx = intArrayOf(0, 1, 0, -1)
     val dy = intArrayOf(-1, 0, 1, 0)
     repeat(t) {
         val (r, c) = br.readLine().split(" ").map{it.toInt()}
         val poly = Array(r) {br.readLine().toCharArray()}
-        val descr = Array(r) {br.readLine().split(" ").filter{it.isNotEmpty()}.map{it.toInt()}.toIntArray()}
+        val descr = Array(r) {br.readLine().split(" ").filter{it.isNotEmpty()}.map{it.toInt()}}
         val idxList = mutableListOf<MutableList<Int>>()
         val idx = mutableListOf<Int>()
         val visited = Array(r) {BooleanArray(c) {false}}
         fun dfs(x:Int, y:Int) {
             visited[x][y] = true
             idx.add(poly[x][y]-'0')
-            val checkNum = Integer.toBinaryString(descr[x][y]).toString()
+            val checkNum = Integer.toBinaryString(descr[x][y])
             for(i in checkNum.lastIndex downTo 0) {
-                val nx = x+dx[i]
-                val ny = y+dy[i]
+                if(checkNum[i]!='1') continue
+                val temp = checkNum.length-i-1
+                val nx = x+dx[3-temp]
+                val ny = y+dy[3-temp]
                 if(nx in 0 until r && ny in 0 until c && !visited[nx][ny]) {
                     dfs(nx, ny)
                 }
