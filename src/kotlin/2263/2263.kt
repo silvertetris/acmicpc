@@ -21,8 +21,8 @@ fun main() {
                 break
             }
         }
-        rec(l, idx - 1, minl, minl - 1 + idx - l)//우측 서브 트리 계산
-        rec(idx + 1, r, minl + idx - l, maxr - 1)//좌측 서브 트리 크기 계산
+        rec(l, idx - 1, minl, minl - 1 + idx - l)//우측 서브 트리 계산 -> 좌노드 rec (어차피 좌측은 끝까지 탐색)
+        rec(idx + 1, r, minl + idx - l, maxr - 1)//좌측 서브 트리 크기 계산 -> 우 노드 rec (어차피 우측은 끝까지 탐색)
     }
     rec(0, n - 1, 0, n - 1)
     bw.flush()
