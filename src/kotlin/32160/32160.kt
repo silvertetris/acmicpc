@@ -15,33 +15,25 @@ fun main() {
         bw.write("${n - 1}\n")
     }
     for (i in n - 2 downTo 1 step 2) {
-        bw.write("$i ${i + 1}\n")
+        bw.write("${i + 1} $i\n")
         cnt++
     }
-    if(n%2==0) {
+
+    var temp = 0//0나오는 개수
+    if (n % 2 == 0) {
         cnt++
-    }
-    var temp = 0
-    for (i in 0 until cnt/2) {//여기가 문제
+    }//1의 개수
+    for (i in 0 until cnt - 1 step 2) {//여기가 문제
         bw.write("1 1\n")
         temp++
     }
-    if(n%2==0) {
-        temp++
+    for (i in 0 until temp - 1) {
+        bw.write("0 0\n")
     }
-    if (temp % 2 == 0) {
-        for (i in 0 until temp/2) {
-            bw.write("0 0\n")
-        }
-    }
-    else {
-        for(i in 0 until temp/2) {
-            bw.write("1 0\n")
-        }
-    }
-    if (temp % 2 == 0) {
+    if (cnt % 2 == 0) {
         bw.write("0 $n")
     } else {
+        if(temp>0) bw.write("1 0\n")
         bw.write("1 $n")
     }
     bw.flush()
