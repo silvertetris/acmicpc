@@ -1,33 +1,49 @@
+import java.util.StringTokenizer
+
 fun main() {
     val br = System.`in`.bufferedReader()
-    val bw = System.out.bufferedWriter()
-    /*
-    이거 10차원 배열 만드는건 아닌거 같은데
-    0 1 패턴이 유지되어야 하는건가?
-    각 변수에서 1을 뺀만큼 유지
-     */
-    val line = br.readLine().split(" ").map { it.toInt() }.toIntArray()
-    var sum = 1
-    for (i in 0 until 10) {
-        sum *= line[i]
+    val coor = br.readLine().split(" ").map{it.toInt()}.toIntArray()
+    var s = 1
+    for(i in 0 until 11) {
+        s*=coor[i]
     }
-    var flag = true
-    for (i in 0 until  sum step line[9]) {
-        var temp = IntArray(line[10]) {-1}
-        for(j in 0 until line[9]) {
-            val arr = br.readLine().split(" ").map { it.toInt() }.toIntArray()
-            for(k in 0 until arr.size) {
-                if(temp[k] == arr[k]) flag = false
-            }
-            temp = arr
+    val arr = IntArray(s+1)
+    var idxCnt = 0
+    for(i in 0 until s/coor[10]) {
+        val str = StringTokenizer(br.readLine())
+        for(j in 0 until coor[10]) {
+            arr[idxCnt] = str.nextToken().toInt()
+            idxCnt++
         }
     }
 
-
-    if (flag) {
-        bw.write("Yes\n")
-    } else {
-        bw.write("No\n")
+    val mul = IntArray(11)//11차원 -> 1차원 시에 각 인덱스의 한계지점 (w시에는 1칸, v시에는 w칸 만큼 점프)
+    var tempMul = s
+    for(i in 0 until 11) {//상위 -> 하위
+        tempMul/=coor[i]
+        mul[i] = tempMul
     }
-    bw.flush()
+
+    val init = arr[0]
+
+    var flag = true
+    for(i in 0 until s) {
+        var tempI = i
+        var sum=0
+        for(j in 0 until 11) {
+            val c = (tempI/mul[j])
+            sum+=c
+            tempI%=mul[j]
+        }
+        val diff= if(sum%2==init) 0 else 1
+        if(arr[i]!=diff) {
+            flag = false
+            break
+        }
+    }
+    if(flag) {
+        print("Yes")
+    } else {
+        print("No")
+    }
 }
