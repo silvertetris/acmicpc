@@ -62,37 +62,46 @@ fun main() {
     -> m1의 최소값을 점차 늘리면서, m2의 구간을 맞춘다? -> O(n^2)의 가능성이 있지 않나?
 
     인덱스가 같으면 -> 그걸 기준으로 양옆으로 펼침 -> 겹치지 않는 지점까지
-    만약 같이 않다면? 그 사이를 쪼개서 찾아야겠지
-     */
-    fun isSameStructure(l: Int, r: Int): Boolean {
+    만약 같이 않다면? 그 사이를 쪼개서 찾아야겠지 -> 완벽하게 겹친다면? 쪼개서 오히려 숫자를 늘림
 
+    0부터 구간 기준으로
+    -> 끝지점에서의 query가 같으면 -> 우측 확장
+    아니면 포기하고 다음 구간 찾기
+     */
+    fun idxCheck(l: Int, r: Int): Boolean {
+        /*
+        stackoverflow 걸리는 이유?
+        m1 무한호출 ? -> 범위 -> 이탈시 예외
+         */
+        if(l>r) return true
         val m1 = query(1, 0, n - 1, l, r, segA, a)
         val m2 = query(1, 0, n - 1, l, r, segB, b)
 
         if (m1 != m2) return false
 
-        return isSameStructure(l, m1 - 1) && isSameStructure(m1 + 1, r)
+        return idxCheck(l, m1 - 1) && idxCheck(m1 + 1, r)
     }
 
     var ans = 0
-    var startIdx = 0
+    var idx = 0
 
-    while (startIdx < n) {
-        var low = startIdx
+    while (idx < n) {
+        var low = idx
         var high = n - 1
-        var bestEnd = startIdx
+        var max = idx
         while (low <= high) {
             val mid = (low + high) / 2
 
-            if (isSameStructure(startIdx, mid)) {
-                bestEnd = mid
+            if (idxCheck(idx, mid)) {
+                max = mid
                 low = mid + 1
             } else {
                 high = mid - 1
             }
         }
         ans++
-        startIdx = bestEnd + 1
+        //최대 우측확장 통과 -> 다음 구간 (포기하고 다음 구간 찾기)
+        idx = max + 1
     }
     print(ans)
 }
