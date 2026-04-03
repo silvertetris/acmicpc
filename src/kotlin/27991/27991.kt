@@ -53,17 +53,15 @@ fun main() {
     val sorted = x.sorted()
     fun findCost (l:Int, r:Int) :Pair<Int, Long> {//streak, cost
         val minIdx = query(1, 0, n-1, l, r)
-        var cost = x[minIdx]
-        var remain =m
-        //이분 탐색으로 바꾸기
+        val cost = x[minIdx]
         var low = 0
-        var high = n
-        while (low < high) {
-            val mid = (low + high) / 2
-            if (sorted[mid] <= cost) {//upperbound
-                low = mid + 1
+        var high = n-1
+        while(low<=high) {
+            val mid = (low+high)/2
+            if(sorted[mid]<cost) {
+                low = mid+1
             } else {
-                high = mid
+                high = mid-1
             }
         }
         val count = low
@@ -71,6 +69,9 @@ fun main() {
 
         var resStreak = streak
         var resCost = cost
+        /*
+        l==minIdx, r==minIdx??
+         */
         if (l < minIdx) {
             val temp = findCost(l, minIdx - 1)
             if (temp.first > resStreak) {
