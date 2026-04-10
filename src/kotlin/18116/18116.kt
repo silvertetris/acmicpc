@@ -3,7 +3,7 @@ fun main() {
     val bw = System.out.bufferedWriter()
     val n = br.readLine().toInt()
     val parent = IntArray(100_000_1) { it }
-    val rank = IntArray(1000_001) { 0 }
+    val rank = IntArray(1000_001) { 1 }
     fun find(x: Int): Int {
         if (x != parent[x]) {
             parent[x] = find(parent[x])
@@ -17,11 +17,16 @@ fun main() {
         if(ra == rb) return
         if(rank[ra]<rank[rb]) {
             parent[ra] = rb
+            rank[rb]+=rank[ra]
+            rank[ra]=0
         } else if(rank[ra]>rank[rb]) {
             parent[rb] = ra
+            rank[ra]+=rank[rb]
+            rank[rb]=0
         } else{
             parent[rb] = ra
-            rank[ra]++
+            rank[ra]+=rank[rb]
+            rank[rb]=0
         }
     }
     repeat(n) {
@@ -29,7 +34,7 @@ fun main() {
         if(temp[0] == "I"){
             union(temp[1].toInt(), temp[2].toInt())
         } else {
-            bw.write("${rank[temp[1].toInt()]}\n")
+            bw.write("${rank[find(temp[1].toInt())]}\n")
         }
     }
     bw.flush()
